@@ -35,16 +35,16 @@ Base URL: `https://<your-domain.com>/api`
 curl -X GET "http://localhost:5000/api/classify-number?number=28"
 ```
 
-## Deployment
+## Deployment on Render
 
-The API is deployed using Flask and is publicly accessible. 
-You can test it by sending a GET request to the `/api/classify-number` endpoint.
+The API is deployed on Render and is publicly accessible on `https://number-classifier-api-nmkh.onrender.com.
+You can test it by sending a GET request to the `https://number-classifier-api-nmkh.onrender.com/api/classify-number` endpoint.
 
 ### Example Request
-To classify a number, make a GET request to `/api/classify-number` with the `number` query parameter:
+To classify a number, make a GET request to `https://number-classifier-api-nmkh.onrender.com/api/classify-number` with the `number` query parameter:
 
 ```sh
-GET /api/classify-number?number=371
+GET https://number-classifier-api-nmkh.onrender.com/api/classify-number?number=371
 ```
 
 ### Example Response (200 OK)
