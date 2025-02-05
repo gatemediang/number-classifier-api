@@ -1,24 +1,47 @@
 # Number Classification API
+This is a simple Flask-based API that classifies numbers and provides interesting mathematical properties and fun facts about them a given number. The API can determine if a number is prime, perfect, or an Armstrong number.
 
-This API provides interesting mathematical properties and a fun fact about a given number.
+## Endpoints
+
+Base URL: `https://<your-domain.com>/api`
+
+### `/api/classify-number`
+
+**Method:** GET
+
+**Description:** Classifies a number and returns interesting mathematical properties and a fun fact about a given number.
+
+**Parameters:**
+- `number` (query parameter): The number to classify.
+
+**Responses:**
+- `200 OK`: Returns a JSON object with the number and its properties.
+- `400 Bad Request`: Returns an error if the input is not a valid number.
+
+## Local Setup
+
+1. Install the required packages:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+2. Run the Flask application:
+    ```sh
+    flask run
+    ```
+3. Fetch below url on browser or curl as below
+
+```sh
+curl -X GET "http://localhost:5000/api/classify-number?number=28"
+```
 
 ## Deployment
 
 The API is deployed using Flask and is publicly accessible. 
 You can test it by sending a GET request to the `/api/classify-number` endpoint.
 
-API Documentation
-Base URL: `https://<your-domain.com>/api`
-
-Endpoint: GET /classify-number
-Description:
-Returns interesting mathematical properties and a fun fact about a given number.
-
-Parameters:
-
-number (required): An integer to analyze
-
 ### Example Request
+To classify a number, make a GET request to `/api/classify-number` with the `number` query parameter:
 
 ```Bash
 GET /api/classify-number?number=371
@@ -56,3 +79,8 @@ even: The number is even.
 
 Error Handling
 400 Bad Request: Returned if the input is not a valid integer.
+
+## License
+
+This project is licensed under the MIT License.
+```
