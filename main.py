@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import math
 
+
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
