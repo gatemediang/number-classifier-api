@@ -43,11 +43,13 @@ You can test it by sending a GET request to the `/api/classify-number` endpoint.
 ### Example Request
 To classify a number, make a GET request to `/api/classify-number` with the `number` query parameter:
 
-```Bash
+```sh
 GET /api/classify-number?number=371
+```
 
 ### Example Response (200 OK)
 
+```sh
 json
 {
     "number": 371,
@@ -56,14 +58,18 @@ json
     "properties": ["armstrong", "odd"],
     "digit_sum": 11,
     "fun_fact": "371 is an Armstrong number because 3^3 + 7^3 + 1^3 = 371"
-}`
+}
+```
 
 ### Example Response (400 Bad Request):
+
+```sh
 json
 {
     "number": "alphabet",
     "error": true
 }
+```
 
 ### Possible Properties:
 
@@ -77,7 +83,7 @@ odd: The number is odd.
 
 even: The number is even.
 
-Error Handling
+### Error Handling
 400 Bad Request: Returned if the input is not a valid integer.
 
 ## License
