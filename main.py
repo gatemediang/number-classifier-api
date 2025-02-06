@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import math
 
-
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
@@ -25,23 +24,27 @@ def is_perfect(n):
     return sum(divisors) == n
 
 
-def is_armstrong(n):
-    """Check if a number is an Armstrong number."""
-    digits = [int(d) for d in str(n)]
-    num_digits = len(digits)
-    return sum(d**num_digits for d in digits) == n
-
-
 def digit_sum(n):
     """Calculate the sum of the digits of a number."""
-    return sum(int(d) for d in str(n))
+    return sum(int(d) for d in str(abs(n)))  # Use abs(n) to handle negative numbers
+
+
+def is_armstrong(n):
+    """Check if a number is an Armstrong number."""
+    num_str = str(abs(n))
+    num_len = len(num_str)
+    return abs(n) == sum(int(digit) ** num_len for digit in num_str)
+
+
+def is_even(n):
+    """Check if a number is even."""
+    return n % 2 == 0
 
 
 def get_fun_fact(n):
     """Generate a fun fact about the number."""
     if is_armstrong(n):
         return f"{n} is an Armstrong number because {' + '.join(f'{d}^{len(str(n))}' for d in str(n))} = {n}"
-
     else:
         return f"{n} is a fascinating number with unique properties."
 
@@ -52,32 +55,34 @@ def classify_number():
     number = request.args.get("number")
 
     # Input validation
-    if not number or not number.lstrip("-").isdigit() or int(number) < 0:
-        return jsonify({"number": number if number else "None", "error": True}), 400
+    if not number:
+        return jsonify({"number": "", "error": True}), 400
+    if not number.lstrip("-").isdigit():
+        return jsonify({"number": number, "error": True}), 400
 
     n = int(number)
     properties = []
-
     if is_armstrong(n):
         properties.append("armstrong")
-    if n % 2 == 1:
-        properties.append("odd")
-    else:
+    if is_even(n):
         properties.append("even")
+    else:
+        properties.append("odd")
 
-    return (
-        jsonify(
-            {
-                "number": n,
-                "is_prime": is_prime(n),
-                "is_perfect": is_perfect(n),
-                "properties": properties,
-                "digit_sum": digit_sum(n),
-                "fun_fact": get_fun_fact(n),
-            }
-        ),
-        200,
-    )
+    response = {
+        "number": n,
+        "is_prime": is_prime(n),
+        "is_perfect": is_perfect(n),
+        "properties": properties,
+        "digit_sum": digit_sum(n),
+        "fun_fact": get_fun_fact(n),
+    }
+
+    if n < 0:
+        response["error"] = True
+        return jsonify(response), 400
+
+    return jsonify(response), 200
 
 
 if __name__ == "__main__":
