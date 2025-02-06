@@ -41,10 +41,7 @@ def get_fun_fact(n):
     """Generate a fun fact about the number."""
     if is_armstrong(n):
         return f"{n} is an Armstrong number because {' + '.join(f'{d}^{len(str(n))}' for d in str(n))} = {n}"
-    elif is_prime(n):
-        return f"{n} is a prime number."
-    elif is_perfect(n):
-        return f"{n} is a perfect number."
+
     else:
         return f"{n} is a fascinating number with unique properties."
 
@@ -55,15 +52,12 @@ def classify_number():
     number = request.args.get("number")
 
     # Input validation
-    if not number or not number.lstrip("-").isdigit():
+    if not number or not number.lstrip("-").isdigit() or int(number) < 0:
         return jsonify({"number": number if number else "None", "error": True}), 400
 
     n = int(number)
     properties = []
-    if is_prime(n):
-        properties.append("prime")
-    if is_perfect(n):
-        properties.append("perfect")
+
     if is_armstrong(n):
         properties.append("armstrong")
     if n % 2 == 1:
