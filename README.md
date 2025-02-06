@@ -3,16 +3,14 @@ This is a simple Flask-based API that classifies numbers and provides interestin
 
 ## Endpoints
 
-Base URL: `https://<your-domain.com>/api`
+Base URL: `https://number-classifier-api-nmkh.onrender.com/`
 
-### `/api/classify-number`
+Endpoint: `/api/classify-number`
 
+Query Parameter: `?number=n` (where n is an integer to classify)
+
+## Request
 **Method:** GET
-
-**Description:** Classifies a number and returns interesting mathematical properties and a fun fact about a given number.
-
-**Parameters:**
-- `number` (query parameter): The number to classify.
 
 **Responses:**
 - `200 OK`: Returns a JSON object with the number and its properties.
